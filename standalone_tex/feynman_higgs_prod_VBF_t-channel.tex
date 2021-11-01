@@ -1,0 +1,31 @@
+
+\documentclass{standalone}
+
+%\documentclass[convert]{standalone}
+% convert: in addition to pdf output files, png files are created
+% convert options does work properly with -output-directory option of latexmk
+
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+
+
+\begin{document}
+\feynmandiagram [small, vertical=a to c] {
+    % higgs production, VBF, t-channel
+    qi1 [particle=q]
+    -- a [dot],
+    a -- qf1 [particle=q],
+    a -- [boson, edge label=V] b [dot],
+    b -- [scalar] H [particle=H],
+    b -- [boson, edge label=V] c [dot],
+    qi2 [particle=q]
+    -- c
+    -- qf2 [particle=q],
+
+    % invisible helper lines for layout
+    qi1 -- [draw=none] ih1 -- [draw=none] qi2,
+    qf1 -- [draw=none] fh1 -- [draw=none] fh2 -- [draw=none] qf2,
+    qf1 -- [draw=none] H,
+    H -- [draw=none] qf2,
+    };
+\end{document}

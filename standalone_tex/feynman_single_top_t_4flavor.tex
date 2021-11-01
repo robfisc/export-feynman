@@ -1,0 +1,44 @@
+
+\documentclass{standalone}
+
+%\documentclass[convert]{standalone}
+% convert: in addition to pdf output files, png files are created
+% convert options does work properly with -output-directory option of latexmk
+
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+
+
+\begin{document}
+\begin{tikzpicture}
+          \begin{feynman}
+            \diagram [vertical=a to b, small] {
+            % draw t-channel qg->qtb
+            i1 [particle=\(q\)]
+            -- [fermion] a
+            -- [fermion] f1 [particle=\( q\)],
+
+            a
+            -- [boson, edge label=\(W\)] b,
+            %-- [fermion, edge label=\(b\)] c,
+
+
+            % outgoing top and bottom quarks
+            f2 [particle=\(b\)]
+            -- [fermion] c
+            -- [fermion, edge label=\(b\)] b
+            -- [fermion]  t [particle=\(t\)]],
+
+            i2 [particle=\(g\)]
+            -- [gluon] c,
+
+
+            % invisible helper lines for layout
+            f2 -- [draw=none] t,
+            f1 -- [draw=none] h1  -- [draw=none] t,
+
+            i1 -- [draw=none] h2 -- [draw=none] h3 -- [draw=none] i2,
+            };
+          \end{feynman}
+        \end{tikzpicture}
+\end{document}

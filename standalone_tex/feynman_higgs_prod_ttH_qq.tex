@@ -1,0 +1,39 @@
+
+\documentclass{standalone}
+
+%\documentclass[convert]{standalone}
+% convert: in addition to pdf output files, png files are created
+% convert options does work properly with -output-directory option of latexmk
+
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+
+
+\begin{document}
+\begin{tikzpicture}
+          \begin{feynman}
+            \diagram [horizontal=a to b] {
+            % draw s-channel qq->ttbar as usual
+              i1 [particle=\(q\)]
+                -- [fermion] a
+                -- [fermion] i2 [particle=\(\overline q\)],
+              a -- [gluon, edge label=\(g\)] b,
+              f1 [particle=\(t\)]
+                -- [fermion] b
+                -- [fermion] f2 [particle=\(t\)]],
+            };
+
+            % add vertex for FSR at 0.3 between vertex (b) and (f1)
+            % add end vertex for FSR (with label H), then draw line between FSR vertices
+            \vertex at ($(b)!0.3!(f1)$) (fsr_start);
+            \vertex [right=1cm of fsr_start] (fsr_end) {H};
+            \draw [scalar] (fsr_start) -- (fsr_end);
+
+            % alternative coordinates for for FSR end vertex
+            % \vertex [above=of f2] (r2invis_helper);
+            % \vertex [right=0.1em of r2invis_helper] (r2) {H};
+            % \draw [scalar] ($(b)!0.3!(f1)$) -- (r2);
+
+          \end{feynman}
+        \end{tikzpicture}
+\end{document}

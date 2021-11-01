@@ -1,0 +1,23 @@
+
+\documentclass{standalone}
+
+%\documentclass[convert]{standalone}
+% convert: in addition to pdf output files, png files are created
+% convert options does work properly with -output-directory option of latexmk
+
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+
+
+\begin{document}
+\feynmandiagram [horizontal=i1 to a, small] {
+          i1 [particle=t] -- [fermion] a  -- [boson, edge label=\(W\)] w,
+          a -- [fermion] b [particle=b],
+          w -- [fermion] wf1 [particle=\(l\)],
+          wf2 [particle=\( \nu\)] -- [fermion] w,
+
+          % invisible helper lines
+          wf1 -- [draw=none] wf2,
+          wf1 -- [draw=none] invis -- [draw=none] b,
+        };
+\end{document}

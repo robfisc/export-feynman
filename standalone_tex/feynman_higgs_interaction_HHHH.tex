@@ -1,0 +1,17 @@
+
+\documentclass{standalone}
+
+%\documentclass[convert]{standalone}
+% convert: in addition to pdf output files, png files are created
+% convert options does work properly with -output-directory option of latexmk
+
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+
+
+\begin{document}
+\feynmandiagram [small, layered layout, horizontal=i1 to f1] {
+      i1 [particle=H] -- [scalar] a -- [scalar] f1 [particle=H],
+      i2 [particle=H] -- [scalar] a -- [scalar] f2 [particle=H],
+    };
+\end{document}
